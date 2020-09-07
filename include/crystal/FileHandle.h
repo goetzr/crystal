@@ -12,21 +12,21 @@ class FileHandle {
 	~FileHandle() { Close(); }
 	FileHandle(FileHandle const&) = delete;
 	FileHandle& operator=(FileHandle const&) = delete;
-	FileHandle(FileHandle&& rhs) noexcept : file_{ rhs.file_ } { rhs.file_ = NULL; }
+	FileHandle(FileHandle&& rhs) noexcept : file_{ rhs.file_ } { rhs.file_ = nullptr; }
 	FileHandle& operator=(FileHandle&& rhs) noexcept {
 		file_ = rhs.file_;
-		rhs.file_ = NULL;
+		rhs.file_ = nullptr;
 		return *this;
 	}
 
 	void Close() noexcept {
 		std::fclose(file_);
-		file_ = NULL;
+		file_ = nullptr;
 	}
 
 	FILE* Get() const noexcept { return file_; }
 
-	bool IsValid() const noexcept { return file_ != NULL; }
+	bool IsValid() const noexcept { return file_ != nullptr; }
 	operator bool() const noexcept { return IsValid(); }
 };
 
